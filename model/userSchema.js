@@ -14,5 +14,5 @@ const User = sequelize.define("User", {
 export default User;
 
 (async () => {
-  await sequelize.sync();
+  await sequelize.sync({ force: true });
 })();
