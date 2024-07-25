@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 export const validateUser = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-
+    console.log(req.headers)
     if (!authorization) {
       return res
         .status(401)
@@ -18,7 +18,7 @@ export const validateUser = async (req, res, next) => {
         .json({ message: "Unauthorized: Invalid token format" });
     }
 
-    const { exp } = jwtDecode(token);
+    const { exp } = jwtDecode(token); 
     const currentTimeInSeconds = Math.floor(Date.now() / 1000);
 
     if (exp < currentTimeInSeconds) {
