@@ -14,5 +14,5 @@ const Data = sequelize.define("Data", {
 export default Data;
 
 (async () => {
-  await sequelize.sync({ force: true });
+  await sequelize.sync();
 })();
