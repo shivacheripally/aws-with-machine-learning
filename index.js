@@ -14,13 +14,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 7000;
 
-app.use(express.static(path.join(__dirname, 'react-app')));
+app.use(express.static(path.join(__dirname, '..', 'aws-frontend', 'build')));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.get('/', (req, res) => {
-  res.send("<h1>Hello World!</h1>")
-})
 app.use("/api", apiRoute);
 app.use("/auth", authRoute);
 
@@ -35,7 +32,7 @@ const syncModels = async () => {
 
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'react-app', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'aws-frontend', 'build', 'index.html'));
 });
 
 syncModels().then(() => {
