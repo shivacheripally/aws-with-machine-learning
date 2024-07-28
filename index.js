@@ -5,10 +5,16 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import "./model/dataSchema.js";
 import "./model/userSchema.js";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 7000;
 
+app.use(express.static(path.join(__dirname, 'react-app')));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -26,6 +32,11 @@ const syncModels = async () => {
     console.error("An error occurred while synchronizing the models:", error);
   }
 };
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'react-app', 'index.html'));
+});
 
 syncModels().then(() => {
   app.listen(port, (err) => {
