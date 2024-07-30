@@ -7,6 +7,7 @@ import "./model/dataSchema.js";
 import "./model/userSchema.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import errorHandle from './errors/errorHandle.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +35,8 @@ const syncModels = async () => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'aws-frontend', 'build', 'index.html'));
 });
+
+app.use(errorHandle);
 
 syncModels().then(() => {
   app.listen(port, (err) => {

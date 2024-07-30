@@ -3,7 +3,6 @@ import { jwtDecode } from "jwt-decode";
 export const validateUser = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    console.log(req.headers)
     if (!authorization) {
       return res
         .status(401)

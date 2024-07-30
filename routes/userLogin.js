@@ -1,10 +1,15 @@
-import express from 'express';
-import { login, signUp } from '../controllers/auth.js';
+import express from "express";
+import {
+  registerUser,
+  loginUser,
+  updatePassword,
+} from "../controllers/register.js";
 const router = express.Router();
 
-router
-    .route('/')
-    .get(login)
-    .post(signUp);
+router.route("/login").post(loginUser);
+
+router.route("/sign-up").post(registerUser);
+
+router.route("/update-password").post(updatePassword);
 
 export default router;
